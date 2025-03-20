@@ -7,6 +7,12 @@ minikube start
 minikube logs
 minikube dashboard
  ```
+
+#### as minikube has no way to implement a loadbalancer
+this is done to expose the port and run the services 
+```bash
+minikube service hello-node
+``` 
 ### Kubectl command lines
 
 ```bash
@@ -26,6 +32,18 @@ kubectl get events
  kubectl config view
 
  ```
+#### To expoce Expose the Cotnainer 
+```bash
+kubectl expose deployment hello-node --type=LoadBalancer --port=8080
+ ```
+ ```bash
+kubectl get services
+ ```
+the output is 
+NAME         TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
+hello-node   LoadBalancer   10.108.144.78   <pending>     8080:30369/TCP   21s
+kubernetes   ClusterIP      10.96.0.1       <none>        443/TCP          23m
+
 
 
 ### Main Git comments

@@ -73,9 +73,14 @@ docker ps
 
 to buld the docker image
 
-```bashs
+```bash
 docker build -t <name>
 docker run -p <from Port>:<to Port>
+```
+
+```bash
+docker stop <container_id>
+docker rm <container_id>
 ```
 
 

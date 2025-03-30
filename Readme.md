@@ -44,7 +44,7 @@ NAME         TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
 hello-node   LoadBalancer   10.108.144.78   <pending>     8080:30369/TCP   21s
 kubernetes   ClusterIP      10.96.0.1       <none>        443/TCP          23m
 
-## KUBEADM COMMANDS
+### KUBEADM COMMANDS
 
 This command is used to set up the control plane and will print out a kubeadm join
 ```bash
@@ -64,12 +64,26 @@ kubectl get pods -n kube-system
 kubectl get pods -n kube-system <The name of the pod>
 ```
 
+### DOCKER COMMANDS 
+
+to see all the containers presennt
+```bash
+docker ps
+```
+
+to buld the docker image
+
+```bashs
+docker build -t <name>
+docker run -p <from Port>:<to Port>
+```
+
 
 
 ### Main Git comments
 
 ```bash
-git remote add https://github.com/Anand-cmd-art/GuidewireHackathon
+git remote set-url origin git@github.com:Anand-cmd-art/GuidewireHackathon.git
 ```
 -> the main branch name is anand.
 -> to run the applications and handel the container opperation we use containerd [ containerd ](https://github.com/containerd/containerd/blob/main/docs/getting-started.md)

@@ -83,6 +83,37 @@ docker stop <container_id>
 docker rm <container_id>
 ```
 
+## NGROK 
+Ngrok is a tunneling tool that creates a secure, publicly accessible URL for your local server. This is especially useful when you need to expose a web service running on your local machine (for testing webhooks, demos, remote debugging, or collaboration) without deploying it to a public server
+#### What is Ngrok Used For?
+Local Development: Easily share your local development server with teammates or clients.
+
+Webhook Testing: Receive webhooks from external services on your local machine.
+
+Remote Debugging: Expose local environments to test integrations or debug issues that occur only in production-like scenarios.
+
+Demo and Collaboration: Quickly create a public URL to demonstrate your work.
+
+### commands
+
+to login 
+```bash
+curl -sSL https://ngrok-agent.s3.amazonaws.com/ngrok.asc \
+  | sudo tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null \
+  && echo "deb https://ngrok-agent.s3.amazonaws.com buster main" \
+  | sudo tee /etc/apt/sources.list.d/ngrok.list \
+  && sudo apt update \
+  && sudo apt install ngrok
+```
+Adding the Ngrok Auth Token
+```bash
+ngrok config add-authtoken 2v3OiUMKafhMkaGeO0ihrYK5GCR_3mEYWZnM3pHMeKBxGQfRX
+```
+Starting a Tunnel
+```bash
+ngrok http http://localhost:8080
+```
+
 
 
 ### Main Git comments

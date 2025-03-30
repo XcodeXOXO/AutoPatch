@@ -1,0 +1,13 @@
+# calico.yaml – Optimized minimal configuration for a 3-node cluster
+apiVersion: projectcalico.org/v3
+kind: Installation
+metadata:
+  name: default
+spec:
+  calicoNetwork:
+    bgp: Enabled
+    ipPools:
+    - cidr: 192.168.49.1/6443
+      encapsulation: VXLAN
+      natOutgoing: true
+      nodeSelector: all()

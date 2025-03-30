@@ -1,0 +1,7 @@
+apiVersion: kubeadm.k8s.io/v1beta4
+kind: ClusterConfiguration
+kubernetesVersion: stable
+controlPlaneEndpoint: "192.168.49.1:6443"
+KUBELET_EXTRA_ARGS="--fail-swap-on=false"
+networking:
+  podSubnet: "192.168.0.0/16"

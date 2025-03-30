@@ -44,6 +44,26 @@ NAME         TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
 hello-node   LoadBalancer   10.108.144.78   <pending>     8080:30369/TCP   21s
 kubernetes   ClusterIP      10.96.0.1       <none>        443/TCP          23m
 
+## KUBEADM COMMANDS
+
+This command is used to set up the control plane and will print out a kubeadm join
+```bash
+sudo kubeadm init --config=kubeadm-config.yaml --upload-certs
+```
+This is used to join Worker node 
+```bash
+sudo kubeadm join 192.168.49.1:6443 \
+    --token 8n1m2b.rj22qt099y5asy1o \
+    --discovery-token-ca-cert-hash sha256:38fe903eecc52183b384a165ce948fa4d18561469485a0bfa9568920c8b15c27
+```
+Used to Get the pod info( off all the pods )
+```bash
+kubectl get pods -n kube-system
+```
+```bash
+kubectl get pods -n kube-system <The name of the pod>
+```
+
 
 
 ### Main Git comments

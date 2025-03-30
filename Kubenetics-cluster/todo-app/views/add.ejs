@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add To-Do</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Add a New To-Do</h1>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/add">Add To-Do</a>
+            <a href="/about">About</a>
+        </nav>
+    </header>
+    <main>
+        <form action="/add" method="POST">
+            <label for="title">To-Do Item:</label>
+            <input type="text" name="title" id="title" required>
+            <button type="submit">Add</button>
+        </form>
+    </main>
+    <footer>
+        <p>&copy; 2025 ToDo App</p>
+    </footer>
+    <script src="/js/main.js"></script>
+</body>
+</html>

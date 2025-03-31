@@ -1,0 +1,40 @@
+pipline{
+    agent any
+
+    environment {
+        IMAGE_NAME = 'tinfoilhatxo/todo-app'
+        REGISTRY_CREDENTIALS='docker-hub'
+    }
+
+    stages {
+        stage('checkout code'){
+            steps{
+                git 'https://github.com/Anand-cmd-art/Kubernetics-Project'
+            }
+        }
+
+        stages('build Docker Image'){
+            steps{
+                script {
+                    docker.build)("${IMAGE_NAME}")
+                }
+            }
+        }
+        stage('Push to Docker Hub') {
+      steps {
+        script {
+          docker.withRegistry('', REGISTRY_CREDENTIALS) {
+            docker.image("${IMAGE_NAME}").push("latest")
+          }
+        }
+      }
+    }
+
+    stage('Deploy to Kubernetes') {
+      steps {
+        sh 'helm upgrade --install todo-app ./helm --namespace default'
+      }
+
+    }
+
+}

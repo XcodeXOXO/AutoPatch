@@ -3,7 +3,7 @@ pipline{
 
     environment {
         IMAGE_NAME = 'tinfoilhatxo/todo-app'
-        REGISTRY_CREDENTIALS='docker-hub'
+        REGISTRY_CREDENTIALS='6a5dc436-fc93-4237-a727-af387e888ba4'
     }
 
     stages {

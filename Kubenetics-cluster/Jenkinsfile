@@ -16,7 +16,7 @@ pipline{
         stages('build Docker Image'){
             steps{
                 script {
-                    docker.build)("${IMAGE_NAME}")
+                    docker.build("${IMAGE_NAME}")
                 }
             }
         }

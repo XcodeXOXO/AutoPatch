@@ -82,6 +82,10 @@ docker run -p <from Port>:<to Port>
 docker stop <container_id>
 docker rm <container_id>
 ```
+to stop all containers regardless of their state (running, paused, etc.)
+```bash
+docker stop $(docker ps -aq)
+```
 
 ## NGROK 
 Ngrok is a tunneling tool that creates a secure, publicly accessible URL for your local server. This is especially useful when you need to expose a web service running on your local machine (for testing webhooks, demos, remote debugging, or collaboration) without deploying it to a public server

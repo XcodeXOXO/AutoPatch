@@ -1,26 +1,28 @@
-pipline{
-    agent any
+pipeline {
+  agent any
 
-    environment {
-        IMAGE_NAME = 'tinfoilhatxo/todo-app'
-        REGISTRY_CREDENTIALS='6a5dc436-fc93-4237-a727-af387e888ba4'
+  environment {
+    IMAGE_NAME = 'anandganesh/todo-app'   // Use lowercase image name
+    REGISTRY_CREDENTIALS = '6a5dc436-fc93-4237-a727-af387e888ba4'
+  }
+
+  stages {
+    stage('Checkout Code') {
+      steps {
+        // Explicitly checkout branch "anand" if needed
+        git branch: 'anand', url: 'https://github.com/Anand-cmd-art/Kubernetics-Project'
+      }
     }
-
-    stages {
-        stage('checkout code'){
-            steps{
-                git 'https://github.com/Anand-cmd-art/Kubernetics-Project'
-            }
+    
+    stage('Build Docker Image') {
+      steps {
+        script {
+          docker.build("${IMAGE_NAME}")
         }
-
-        stages('build Docker Image'){
-            steps{
-                script {
-                    docker.build("${IMAGE_NAME}")
-                }
-            }
-        }
-        stage('Push to Docker Hub') {
+      }
+    }
+    
+    stage('Push to Docker Hub') {
       steps {
         script {
           docker.withRegistry('', REGISTRY_CREDENTIALS) {
@@ -29,12 +31,11 @@ pipline{
         }
       }
     }
-
+    
     stage('Deploy to Kubernetes') {
       steps {
         sh 'helm upgrade --install todo-app ./helm --namespace default'
       }
-
     }
-
+  }  
 }

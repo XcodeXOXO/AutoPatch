@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployemt
+metadata:
+name: {{ include "todo-app.fullname" . }} # "name" is imported from the helper functiom
+labels:  # they are added fo identification of service sectors
+  app: {{ include "todo-app.name" . }}
+  chart: {{ include "todo-app.chart" . }}
+  release: {{ .Release.Name }}
+spec:
+  replicas :{{ .Values.replicaCount }}
+  selector:
+    matchLables:
+      app: {{ include "todo-app.name" . }}
+      release: {{ .Release.Name }}
+   template:
+    metedata:
+      labels:
+        app: {{ include "todo-app.name" . }}
+        release: {{ .Release.Name }}
+    spec:
+      containers:
+        - name: {{ include "todo-app.name" . }}
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.service.port }}
+              protocol: TCP
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+ 

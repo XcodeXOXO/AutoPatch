@@ -1,0 +1,26 @@
+replicaCount: 3 # the number of deployments for the project (pods)
+
+image:
+  repository: tinfoilhatxo/todo-app
+  pullPolicy: IfNotPresent
+  tag: "latest"
+
+service:
+  type: ClusterIP # is used for internal access within the cluster.
+  port: 3000
+# these resource nodeSelector tolerations are used to set the system usage limits by the pods.
+resources: 
+  limits:
+    cpu: "200m"
+    memory: "256MI"
+  requests:
+    cpu: "25om"
+    memory: "64Mi"
+
+nodeSelector:
+  kubernetes.io/os: Linux # The kube scheduler tells the pods to run on linux
+tolerations:
+  - key: "node-role.kubernetes.io/master"
+    operator: "Exists"
+    effects: "NoSchedule"
+affinity: {}

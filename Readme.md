@@ -117,6 +117,16 @@ Starting a Tunnel
 ```bash
 ngrok http http://localhost:8080
 ```
+### helm
+Helm is the package manager for Kubernetes, similar to how apt works for Debian or pip works for Python.
+
+Instead of writing huge, repetitive YAML files for deployments, services, ingress, etc., Helm lets you:
+
+Define reusable templates for Kubernetes resources
+
+Pass in environment-specific variables (via values.yaml)
+
+Version and manage your Kubernetes deployments like packages
 
 
 

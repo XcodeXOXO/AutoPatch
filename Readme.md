@@ -128,6 +128,14 @@ Pass in environment-specific variables (via values.yaml)
 
 Version and manage your Kubernetes deployments like packages
 
+### Pipeline commands 
+
+#### to login to jenkins when the pipeline is switched on from scratch you need to access the jenkins always using the new Pass.
+
+too access the pass
+```bash
+sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+```
 
 
 ### Main Git comments

@@ -2,31 +2,32 @@ pipeline {
   agent any
 
   environment {
-    IMAGE_NAME = 'anandganesh/todo-app'   // Use lowercase image name
+    IMAGE_NAME = 'anandganesh/todo-app'  // Docker image name must be lowercase.
     REGISTRY_CREDENTIALS = '6a5dc436-fc93-4237-a727-af387e888ba4'
   }
 
   stages {
     stage('Checkout Code') {
       steps {
-        // Explicitly checkout branch "anand" if needed
+        // Check out the 'anand' branch from your GitHub repository.
         git branch: 'anand', url: 'https://github.com/Anand-cmd-art/Kubernetics-Project'
       }
     }
     
     stage('Build Docker Image') {
       steps {
-        script {
-          docker.build("${IMAGE_NAME}")
-        }
+        // Build the Docker image using the Dockerfile in the root directory.
+        // This requires Docker to be installed on the Jenkins node.
+        sh "docker build -t ${IMAGE_NAME} ."
       }
     }
     
     stage('Push to Docker Hub') {
       steps {
         script {
+          // Authenticate to Docker Hub and push the image with the "latest" tag.
           docker.withRegistry('', REGISTRY_CREDENTIALS) {
-            docker.image("${IMAGE_NAME}").push("latest")
+            sh "docker push ${IMAGE_NAME}:latest"
           }
         }
       }
@@ -34,8 +35,9 @@ pipeline {
     
     stage('Deploy to Kubernetes') {
       steps {
+        // Deploy or upgrade the release using Helm.
         sh 'helm upgrade --install todo-app ./helm --namespace default'
       }
     }
-  }  
+  }
 }

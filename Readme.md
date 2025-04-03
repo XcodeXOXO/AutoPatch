@@ -64,7 +64,14 @@ kubectl get pods -n kube-system
 kubectl get pods -n kube-system <The name of the pod>
 ```
 
-### Importent IP addresses to remember 
+### Importent Pointers
+
+-> In jenkins The network proxy is changed to a tunneled IP using ngrok go the NGROK section to see how it is done.
+   so every time you have to change the IP in the jenkins every time to avoid any malfunction of the pipeline 
+
+  STEPS
+  Manage Jenkins -> <search> System -> go to the part where you see the https://localhost:8080 -> change to tunneled IP  
+
 
 
 

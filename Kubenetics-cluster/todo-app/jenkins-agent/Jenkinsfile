@@ -9,23 +9,24 @@ pipeline {
   stages {
     stage('Checkout Code') {
       steps {
-        // Check out the 'anand' branch from your GitHub repository.
+        // Checkout the 'anand' branch from your GitHub repository.
         git branch: 'anand', url: 'https://github.com/Anand-cmd-art/Kubernetics-Project'
       }
     }
     
     stage('Build Docker Image') {
       steps {
-        // Build the Docker image using the Dockerfile in the root directory.
-        // This requires Docker to be installed on the Jenkins node.
-        sh "docker build -t ${IMAGE_NAME} ."
+        script {
+          // If your Dockerfile is in the "todo-app" directory, use that as the build context.
+          sh "docker build -t ${IMAGE_NAME} todo-app"
+        }
       }
     }
     
     stage('Push to Docker Hub') {
       steps {
         script {
-          // Authenticate to Docker Hub and push the image with the "latest" tag.
+          // Authenticate to Docker Hub using the provided credentials and push the image.
           docker.withRegistry('', REGISTRY_CREDENTIALS) {
             sh "docker push ${IMAGE_NAME}:latest"
           }
@@ -35,7 +36,7 @@ pipeline {
     
     stage('Deploy to Kubernetes') {
       steps {
-        // Deploy or upgrade the release using Helm.
+        // Deploy (or upgrade) your application using Helm.
         sh 'helm upgrade --install todo-app ./helm --namespace default'
       }
     }

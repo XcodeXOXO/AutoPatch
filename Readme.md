@@ -141,7 +141,7 @@ sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 ### Main Git comments
 
 ```bash
-git remote set-url origin git@github.com:Anand-cmd-art/GuidewireHackathon.git
+git add remote origin <TO THE REPO LINK>
 ```
 -> the main branch name is anand.
 -> to run the applications and handel the container opperation we use containerd [ containerd ](https://github.com/containerd/containerd/blob/main/docs/getting-started.md)

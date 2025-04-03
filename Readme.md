@@ -64,6 +64,10 @@ kubectl get pods -n kube-system
 kubectl get pods -n kube-system <The name of the pod>
 ```
 
+### Importent IP addresses to remember 
+
+
+
 ### DOCKER COMMANDS 
 
 to see all the containers presennt

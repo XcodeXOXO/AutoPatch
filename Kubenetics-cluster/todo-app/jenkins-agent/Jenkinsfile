@@ -4,8 +4,8 @@ pipeline {
   }
 
   environment {
-    IMAGE_NAME = 'anandganesh/todo-app'  // Docker image name must be lowercase.
-    REGISTRY_CREDENTIALS = '6a5dc436-fc93-4237-a727-af387e888ba4'
+    IMAGE_NAME = 'tinfoilhatxo/todo-app'  // Docker image name must be lowercase.
+    REGISTRY_CREDENTIALS = 'docker-hub'
   }
 
   stages {
@@ -19,7 +19,7 @@ pipeline {
     stage('Build Docker Image') {
       steps {
         script {
-          // If your Dockerfile is in the "todo-app" directory, use that as the build context.
+          // Build the Docker image using the "todo-app" directory as the build context.
           sh "docker build -t ${IMAGE_NAME} todo-app"
         }
       }

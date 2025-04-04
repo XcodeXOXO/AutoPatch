@@ -16,11 +16,18 @@ pipeline {
       }
     }
     
+    stage('List Workspace') {
+      steps {
+        // List directories to verify the repository structure.
+        sh 'find . -type d -print'
+      }
+    }
+    
     stage('Build Docker Image') {
       steps {
         script {
-          // Build the Docker image using the "todo-app" directory as the build context.
-          sh "docker build -t ${IMAGE_NAME} todo-app"
+          // Build the image using the correct build context.
+          sh "docker build -t ${IMAGE_NAME} Kubenetics-cluster/todo-app"
         }
       }
     }
@@ -28,9 +35,11 @@ pipeline {
     stage('Push to Docker Hub') {
       steps {
         script {
-          // Authenticate to Docker Hub using the provided credentials and push the image.
+          // Optionally, you can rebuild the image or simply push the one from the previous stage.
+          def img = docker.build("${IMAGE_NAME}", "Kubenetics-cluster/todo-app")
           docker.withRegistry('', REGISTRY_CREDENTIALS) {
             sh "docker push ${IMAGE_NAME}:latest"
+            // Alternatively: img.push("latest")
           }
         }
       }
@@ -38,8 +47,8 @@ pipeline {
     
     stage('Deploy to Kubernetes') {
       steps {
-        // Deploy (or upgrade) your application using Helm.
-        sh 'helm upgrade --install todo-app ./helm --namespace default'
+        // Use the correct Helm chart path.
+        sh 'helm upgrade --install todo-app Kubenetics-cluster/todo-app/helm --namespace default'
       }
     }
   }

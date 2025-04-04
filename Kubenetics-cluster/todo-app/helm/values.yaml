@@ -14,7 +14,7 @@ resources:
     cpu: "200m"
     memory: "256MI"
   requests:
-    cpu: "25om"
+    cpu: "250m"
     memory: "64Mi"
 
 nodeSelector:

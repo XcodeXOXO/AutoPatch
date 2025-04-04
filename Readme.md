@@ -147,6 +147,8 @@ too access the pass
 ```bash
 sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 ```
+### Helm commands
+```bash
 
 
 ### Main Git comments

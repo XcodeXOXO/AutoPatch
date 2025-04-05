@@ -8,7 +8,18 @@
 ```bash
 kubectl port-forward service/todo-app-todo-app 8081:3000
 ```
-
+2. To run the dashboard 
+  2.1) you run the proxy first
+```bash
+ kubectl -n kubernetes-dashboard create token admin-user
+ ```
+  2.2) you generate the admin access token by this 
+```bash
+kubectl -n kubernetes-dashboard create token admin-user
+```
+  2.3) go to this link 
+  http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/#/login
+  
 
 
 ### Minikube 

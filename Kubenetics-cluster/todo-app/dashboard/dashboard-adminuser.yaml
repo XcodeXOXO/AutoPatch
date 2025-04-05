@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: admin-user
+  namespace: kubernetes-dashboard
+  labels:
+    app: kubernetes-dashboard
+    chart: kubernetes-dashboard-5.5.1
+    release: kubernetes-dashboard
+    heritage: Helm

@@ -1,19 +1,19 @@
 apiVersion: apps/v1
-kind: Deployemt
+kind: Deployment
 metadata:
-name: {{ include "todo-app.fullname" . }} # "name" is imported from the helper functiom
-labels:  # they are added fo identification of service sectors
-  app: {{ include "todo-app.name" . }}
-  chart: {{ include "todo-app.chart" . }}
-  release: {{ .Release.Name }}
+  name: {{ include "todo-app.fullname" . }}  # "name" is imported from the helper function
+  labels:  # They are added for identification of service sectors
+    app: {{ include "todo-app.name" . }}
+    chart: {{ include "todo-app.chart" . }}
+    release: {{ .Release.Name }}
 spec:
-  replicas :{{ .Values.replicaCount }}
+  replicas: {{ .Values.replicaCount }}  # Corrected indentation here
   selector:
-    matchLables:
+    matchLabels:  # Corrected indentation here
       app: {{ include "todo-app.name" . }}
       release: {{ .Release.Name }}
-   template:
-    metedata:
+  template:
+    metadata:  # Corrected indentation here
       labels:
         app: {{ include "todo-app.name" . }}
         release: {{ .Release.Name }}
@@ -27,5 +27,4 @@ spec:
               containerPort: {{ .Values.service.port }}
               protocol: TCP
           resources:
-            {{- toYaml .Values.resources | nindent 12 }}
- 
+            {{- toYaml .Values.resources | nindent 12 }}  # Ensuring proper indentation

@@ -13,13 +13,14 @@ service:
   type: ClusterIP # is used for internal access within the cluster.
   port: 3000
 # these resource nodeSelector tolerations are used to set the system usage limits by the pods.
-resources: 
+resources:
   limits:
     cpu: "200m"
-    memory: "256MI"
+    memory: "256Mi"  # Fixed the unit
   requests:
     cpu: "250m"
-    memory: "64Mi"
+    memory: "64Mi"   # Fixed the unit
+
 
 nodeSelector:
   kubernetes.io/os: Linux # The kube scheduler tells the pods to run on linux

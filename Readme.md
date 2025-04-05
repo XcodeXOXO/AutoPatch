@@ -13,7 +13,7 @@ this is done to expose the port and run the services
 ```bash
 minikube service hello-node
 ``` 
-### Kubectl command lines
+### Kubectl command lines (kubernetes commands)
 
 ```bash
 kubectl get node
@@ -22,12 +22,27 @@ kubectl get node
 ```bash
  kubectl create deployment hello-node --image=registry.k8s.io/e2e-test-images/agnhost:2.39 -- /agnhost netexec --http-port=8080
  ```
+ 
+ To get all the pods, deployments, services.
+ 
  ```bash
  kubectl get pods
  ```
+```bash
+kubectl get deployments
+```
+
+```bash
+kubectl get services
+```
+```bash
+kubectl logs <pod-name>
+```
+
  ```bash
 kubectl get events
  ```
+ 
  ```bash
  kubectl config view
 

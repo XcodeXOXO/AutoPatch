@@ -1,4 +1,16 @@
 # Kubernetics command 
+
+## Things to remember:
+1. To run the Cluster:
+  1.1) You run the jenkins pipeline
+  1.2) you run the pods
+  1.3) you manuallly forward the port 
+```bash
+kubectl port-forward service/todo-app-todo-app 8081:3000
+```
+
+
+
 ### Minikube 
 ```bash
 minikube start 

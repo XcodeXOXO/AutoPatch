@@ -12,7 +12,7 @@ image:
 service:
   type: NodePort
   port: 3000
-  targetPort: 3000
+  targetPort: 8081
   nodePort: 30080
 # these resource nodeSelector tolerations are used to set the system usage limits by the pods.
 resources:

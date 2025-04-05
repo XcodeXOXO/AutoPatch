@@ -42,7 +42,7 @@ kubectl logs <pod-name>
  ```bash
 kubectl get events
  ```
- 
+
  ```bash
  kubectl config view
 

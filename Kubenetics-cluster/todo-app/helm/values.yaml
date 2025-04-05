@@ -10,8 +10,10 @@ image:
   tag: "latest"
 
 service:
-  type: ClusterIP # is used for internal access within the cluster.
+  type: NodePort
   port: 3000
+  targetPort: 3000
+  nodePort: 30080
 # these resource nodeSelector tolerations are used to set the system usage limits by the pods.
 resources:
   limits:

@@ -27,7 +27,7 @@ pipeline {
       steps {
         script {
           // Build the image using the "Kubenetics-cluster/todo-app" directory as context.
-          sh "docker build -t ${IMAGE_NAME} Kubenetics-cluster/todo-app"
+          sh "docker build -t ${IMAGE_NAME} ./Kubenetics-cluster/todo-app"
         }
       }
     }
@@ -35,10 +35,9 @@ pipeline {
     stage('Push to Docker Hub') {
       steps {
         script {
-          def img = docker.build("${IMAGE_NAME}", "Kubenetics-cluster/todo-app")
+          def img = docker.build("${IMAGE_NAME}", "./Kubenetics-cluster/todo-app")
           docker.withRegistry('', REGISTRY_CREDENTIALS) {
             sh "docker push ${IMAGE_NAME}:latest"
-            // You could also use: img.push("latest")
           }
         }
       }
@@ -46,29 +45,41 @@ pipeline {
 
     stage('Deploy Todo App to Kubernetes') {
       steps {
-        // Deploy or upgrade the todo-app chart, explicitly overriding service port to 3005.
-        // The --set parameter overrides values in your chart (ensure your Chart.yaml/values.yaml support this).
-        sh 'helm upgrade --install todo-app Kubenetics-cluster/todo-app/helm --namespace default --set service.port=3005'
+        // Deploy or upgrade the local "todo-app" chart in "./Kubenetics-cluster/todo-app/helm".
+        sh '''
+          helm upgrade --install todo-app \
+            ./Kubenetics-cluster/todo-app/helm \
+            --namespace default \
+            --set service.port=3005
+        '''
       }
     }
 
     stage('Deploy Grafana to Kubernetes') {
       steps {
-        // Deploy or upgrade Grafana, ensuring it uses port 3000.
-        // Adjust the chart path if your Grafana Helm chart lives elsewhere.
-        sh 'helm upgrade --install grafana Kubenetics-cluster/grafana/helm --namespace default --set service.port=3000'
+        // Use the OFFICIAL 'grafana/grafana' chart from the 'grafana' repo
+        sh '''
+          helm upgrade --install grafana \
+            grafana/grafana \
+            --namespace default \
+            --set service.port=3000
+        '''
       }
     }
 
     stage('Deploy Prometheus to Kubernetes') {
       steps {
-        // Deploy or upgrade Prometheus; here we override for the Prometheus server if needed.
-        // Typically, Prometheus server runs on port 9090, as per your setup.
-        sh 'helm upgrade --install prometheus Kubenetics-cluster/prometheus/helm --namespace default --set server.port=9090'
+        // Same approach for Prometheus: 'prometheus-community/prometheus'
+        sh '''
+          helm upgrade --install prometheus \
+            prometheus-community/prometheus \
+            --namespace default \
+            --set server.port=9090
+        '''
       }
     }
   }
-  
+
   post {
     success {
       echo 'Pipeline executed successfully. Check your deployments in Kubernetes!'
